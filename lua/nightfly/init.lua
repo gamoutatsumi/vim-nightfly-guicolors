@@ -5,6 +5,13 @@ local highlight = vim.api.nvim_set_hl
 -- Background and foreground
 local black = "#011627"
 local white = "#c3ccdc"
+local none = "NONE"
+local bg
+if g.nightflyTransparent then
+  bg = none
+else
+  bg = black
+end
 -- Variations of blue-grey
 local black_blue = "#081e2f"
 local dark_blue = "#092236"
@@ -36,14 +43,15 @@ local cyan_blue = "#296596"
 local M = {}
 
 M.core = function()
+  highlight(0, "Normal", { fg = white, bg = bg })
   highlight(0, "Whitespace", { fg = regal_blue })
-  highlight(0, "TermCursor", { bg = cadet_blue, fg = "bg" })
+  highlight(0, "TermCursor", { bg = cadet_blue, fg = bg })
   if g.nightflyNormalFloat then
-    highlight(0, "NormalFloat", { bg = "bg", fg = cadet_blue })
+    highlight(0, "NormalFloat", { bg = bg, fg = cadet_blue })
   else
     highlight(0, "NormalFloat", { bg = dark_blue, fg = "fg" })
   end
-  highlight(0, "FloatBorder", { bg = "bg", fg = slate_blue })
+  highlight(0, "FloatBorder", { bg = bg, fg = slate_blue })
   highlight(0, "WinBar", { bg = deep_blue, fg = white })
   highlight(0, "WinBarNC", { bg = deep_blue, fg = cadet_blue })
   highlight(0, "WinSeparator", { link = "VertSplit" })
